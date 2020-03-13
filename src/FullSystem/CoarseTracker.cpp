@@ -1,6 +1,6 @@
 /**
 * This file is part of DSO.
-* 
+*
 * Copyright 2016 Technical University of Munich and Intel.
 * Developed by Jakob Engel <engelj at in dot tum dot de>,
 * for more information see <http://vision.in.tum.de/dso>.
@@ -293,7 +293,7 @@ void CoarseTracker::makeCoarseDepthL0(std::vector<FrameHessian*> frameHessians)
 
 
 
-void CoarseTracker::calcGSSSE(int lvl, Mat88 &H_out, Vec8 &b_out, const SE3 &refToNew, AffLight aff_g2l)
+void CoarseTracker::calcGSSSE(int lvl, Mat88 &H_out, Vec8 &b_out, const SE3R &refToNew, AffLight aff_g2l)
 {
 	acc.initialize();
 
@@ -355,7 +355,7 @@ void CoarseTracker::calcGSSSE(int lvl, Mat88 &H_out, Vec8 &b_out, const SE3 &ref
 
 
 
-Vec6 CoarseTracker::calcRes(int lvl, const SE3 &refToNew, AffLight aff_g2l, float cutoffTH)
+Vec6 CoarseTracker::calcRes(int lvl, const SE3R &refToNew, AffLight aff_g2l, float cutoffTH)
 {
 	float E = 0;
 	int numTermsInE = 0;
@@ -535,7 +535,7 @@ void CoarseTracker::setCoarseTrackingRef(
 }
 bool CoarseTracker::trackNewestCoarse(
 		FrameHessian* newFrameHessian,
-		SE3 &lastToNew_out, AffLight &aff_g2l_out,
+		SE3R &lastToNew_out, AffLight &aff_g2l_out,
 		int coarsestLvl,
 		Vec5 minResForAbort,
 		IOWrap::Output3DWrapper* wrap)
@@ -553,7 +553,7 @@ bool CoarseTracker::trackNewestCoarse(
 	int maxIterations[] = {10,20,50,50,50};
 	float lambdaExtrapolationLimit = 0.001;
 
-	SE3 refToNew_current = lastToNew_out;
+	SE3R refToNew_current = lastToNew_out;
 	AffLight aff_g2l_current = aff_g2l_out;
 
 	bool haveRepeated = false;
@@ -636,7 +636,7 @@ bool CoarseTracker::trackNewestCoarse(
 
             if(!std::isfinite(incScaled.sum())) incScaled.setZero();
 
-			SE3 refToNew_new = SE3::exp((Vec6)(incScaled.head<6>())) * refToNew_current;
+			SE3R refToNew_new = SE3R::exp((Vec6)(incScaled.head<6>())) * refToNew_current;
 			AffLight aff_g2l_new = aff_g2l_current;
 			aff_g2l_new.a += incScaled[6];
 			aff_g2l_new.b += incScaled[7];
@@ -884,7 +884,7 @@ void CoarseDistanceMap::makeDistanceMap(
 	{
 		if(frame == fh) continue;
 
-		SE3 fhToNew = frame->PRE_worldToCam * fh->PRE_camToWorld;
+		SE3R fhToNew = frame->PRE_worldToCam * fh->PRE_camToWorld;
 		Mat33f KRKi = (K[1] * fhToNew.rotationMatrix().cast<float>() * Ki[0]);
 		Vec3f Kt = (K[1] * fhToNew.translation().cast<float>());
 

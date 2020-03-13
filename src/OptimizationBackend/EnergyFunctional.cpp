@@ -1,6 +1,6 @@
 /**
 * This file is part of DSO.
-* 
+*
 * Copyright 2016 Technical University of Munich and Intel.
 * Developed by Jakob Engel <engelj at in dot tum dot de>,
 * for more information see <http://vision.in.tum.de/dso>.
@@ -57,7 +57,7 @@ void EnergyFunctional::setAdjointsF(CalibHessian* Hcalib)
 			FrameHessian* host = frames[h]->data;
 			FrameHessian* target = frames[t]->data;
 
-			SE3 hostToTarget = target->get_worldToCam_evalPT() * host->get_worldToCam_evalPT().inverse();
+			SE3R hostToTarget = target->get_worldToCam_evalPT() * host->get_worldToCam_evalPT().inverse();
 
 			Mat88 AH = Mat88::Identity();
 			Mat88 AT = Mat88::Identity();

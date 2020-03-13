@@ -1,6 +1,6 @@
 /**
 * This file is part of DSO.
-* 
+*
 * Copyright 2016 Technical University of Munich and Intel.
 * Developed by Jakob Engel <engelj at in dot tum dot de>,
 * for more information see <http://vision.in.tum.de/dso>.
@@ -40,11 +40,11 @@ public:
 	double timestamp;		// timestamp passed into DSO.
 
 	// set once after tracking
-	SE3 camToTrackingRef;
+	SE3R camToTrackingRef;
 	FrameShell* trackingRef;
 
 	// constantly adapted.
-	SE3 camToWorld;				// Write: TRACKING, while frame is still fresh; MAPPING: only when locked [shellPoseMutex].
+	SE3R camToWorld;				// Write: TRACKING, while frame is still fresh; MAPPING: only when locked [shellPoseMutex].
 	AffLight aff_g2l;
 	bool poseValid;
 
@@ -59,16 +59,15 @@ public:
 	{
 		id=0;
 		poseValid=true;
-		camToWorld = SE3();
+		camToWorld = SE3R();
 		timestamp=0;
 		marginalizedAt=-1;
 		movedByOpt=0;
 		statistics_outlierResOnThis=statistics_goodResOnThis=0;
 		trackingRef=0;
-		camToTrackingRef = SE3();
+		camToTrackingRef = SE3R();
 	}
 };
 
 
 }
-

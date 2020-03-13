@@ -1,6 +1,6 @@
 /**
 * This file is part of DSO.
-* 
+*
 * Copyright 2016 Technical University of Munich and Intel.
 * Developed by Jakob Engel <engelj at in dot tum dot de>,
 * for more information see <http://vision.in.tum.de/dso>.
@@ -52,7 +52,7 @@ KeyFrameDisplay::KeyFrameDisplay()
 
 	id = 0;
 	active= true;
-	camToWorld = SE3();
+	camToWorld = SE3R();
 
 	needRefresh=true;
 

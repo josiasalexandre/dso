@@ -1,6 +1,6 @@
 /**
 * This file is part of DSO.
-* 
+*
 * Copyright 2016 Technical University of Munich and Intel.
 * Developed by Jakob Engel <engelj at in dot tum dot de>,
 * for more information see <http://vision.in.tum.de/dso>.
@@ -86,7 +86,7 @@ public:
 
 	int id;
 	bool active;
-	SE3 camToWorld;
+	SE3R camToWorld;
 
     inline bool operator < (const KeyFrameDisplay& other) const
     {
@@ -120,4 +120,3 @@ private:
 
 }
 }
-

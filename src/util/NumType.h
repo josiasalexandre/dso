@@ -1,6 +1,6 @@
 /**
 * This file is part of DSO.
-* 
+*
 * Copyright 2016 Technical University of Munich and Intel.
 * Developed by Jakob Engel <engelj at in dot tum dot de>,
 * for more information see <http://vision.in.tum.de/dso>.
@@ -45,117 +45,117 @@ namespace dso
 #define todouble(x) (x).cast<double>()
 
 
-typedef Sophus::SE3d SE3;
-typedef Sophus::Sim3d Sim3;
-typedef Sophus::SO3d SO3;
+using SE3R = Sophus::SE3d;
+using Sim3 = Sophus::Sim3d;
+using SO3 = Sophus::SO3d;
 
 
 
 #define CPARS 4
 
 
-typedef Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic> MatXX;
-typedef Eigen::Matrix<double,CPARS,CPARS> MatCC;
+using MatXX = Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic>;
+using MatCC = Eigen::Matrix<double,CPARS,CPARS>;
 #define MatToDynamic(x) MatXX(x)
 
 
 
-typedef Eigen::Matrix<double,CPARS,10> MatC10;
-typedef Eigen::Matrix<double,10,10> Mat1010;
-typedef Eigen::Matrix<double,13,13> Mat1313;
+using MatC10 = Eigen::Matrix<double,CPARS,10>;
+using Mat1010 = Eigen::Matrix<double,10,10>;
+using Mat1313 = Eigen::Matrix<double,13,13>;
 
-typedef Eigen::Matrix<double,8,10> Mat810;
-typedef Eigen::Matrix<double,8,3> Mat83;
-typedef Eigen::Matrix<double,6,6> Mat66;
-typedef Eigen::Matrix<double,5,3> Mat53;
-typedef Eigen::Matrix<double,4,3> Mat43;
-typedef Eigen::Matrix<double,4,2> Mat42;
-typedef Eigen::Matrix<double,3,3> Mat33;
-typedef Eigen::Matrix<double,2,2> Mat22;
-typedef Eigen::Matrix<double,8,CPARS> Mat8C;
-typedef Eigen::Matrix<double,CPARS,8> MatC8;
-typedef Eigen::Matrix<float,8,CPARS> Mat8Cf;
-typedef Eigen::Matrix<float,CPARS,8> MatC8f;
+using Mat810 = Eigen::Matrix<double,8,10>;
+using Mat83 = Eigen::Matrix<double,8,3>;
+using Mat66 = Eigen::Matrix<double,6,6>;
+using Mat53 = Eigen::Matrix<double,5,3>;
+using Mat43 = Eigen::Matrix<double,4,3>;
+using Mat42 = Eigen::Matrix<double,4,2>;
+using Mat33 = Eigen::Matrix<double,3,3>;
+using Mat22 = Eigen::Matrix<double,2,2>;
+using Mat8C = Eigen::Matrix<double,8,CPARS>;
+using MatC8 = Eigen::Matrix<double,CPARS,8>;
+using Mat8Cf = Eigen::Matrix<float,8,CPARS>;
+using MatC8f = Eigen::Matrix<float,CPARS,8>;
 
-typedef Eigen::Matrix<double,8,8> Mat88;
-typedef Eigen::Matrix<double,7,7> Mat77;
+using Mat88 = Eigen::Matrix<double,8,8>;
+using Mat77 = Eigen::Matrix<double,7,7>;
 
-typedef Eigen::Matrix<double,CPARS,1> VecC;
-typedef Eigen::Matrix<float,CPARS,1> VecCf;
-typedef Eigen::Matrix<double,13,1> Vec13;
-typedef Eigen::Matrix<double,10,1> Vec10;
-typedef Eigen::Matrix<double,9,1> Vec9;
-typedef Eigen::Matrix<double,8,1> Vec8;
-typedef Eigen::Matrix<double,7,1> Vec7;
-typedef Eigen::Matrix<double,6,1> Vec6;
-typedef Eigen::Matrix<double,5,1> Vec5;
-typedef Eigen::Matrix<double,4,1> Vec4;
-typedef Eigen::Matrix<double,3,1> Vec3;
-typedef Eigen::Matrix<double,2,1> Vec2;
-typedef Eigen::Matrix<double,Eigen::Dynamic,1> VecX;
+using VecC = Eigen::Matrix<double,CPARS,1>;
+using VecCf = Eigen::Matrix<float,CPARS,1>;
+using Vec13 = Eigen::Matrix<double,13,1>;
+using Vec10 = Eigen::Matrix<double,10,1>;
+using Vec9 = Eigen::Matrix<double,9,1>;
+using Vec8 = Eigen::Matrix<double,8,1>;
+using Vec7 = Eigen::Matrix<double,7,1>;
+using Vec6 = Eigen::Matrix<double,6,1>;
+using Vec5 = Eigen::Matrix<double,5,1>;
+using Vec4 = Eigen::Matrix<double,4,1>;
+using Vec3 = Eigen::Matrix<double,3,1>;
+using Vec2 = Eigen::Matrix<double,2,1>;
+using VecX = Eigen::Matrix<double,Eigen::Dynamic,1>;
 
-typedef Eigen::Matrix<float,3,3> Mat33f;
-typedef Eigen::Matrix<float,10,3> Mat103f;
-typedef Eigen::Matrix<float,2,2> Mat22f;
-typedef Eigen::Matrix<float,3,1> Vec3f;
-typedef Eigen::Matrix<float,2,1> Vec2f;
-typedef Eigen::Matrix<float,6,1> Vec6f;
-
-
-
-typedef Eigen::Matrix<double,4,9> Mat49;
-typedef Eigen::Matrix<double,8,9> Mat89;
-
-typedef Eigen::Matrix<double,9,4> Mat94;
-typedef Eigen::Matrix<double,9,8> Mat98;
-
-typedef Eigen::Matrix<double,8,1> Mat81;
-typedef Eigen::Matrix<double,1,8> Mat18;
-typedef Eigen::Matrix<double,9,1> Mat91;
-typedef Eigen::Matrix<double,1,9> Mat19;
+using Mat33f = Eigen::Matrix<float,3,3>;
+using Mat103f = Eigen::Matrix<float,10,3>;
+using Mat22f = Eigen::Matrix<float,2,2>;
+using Vec3f = Eigen::Matrix<float,3,1>;
+using Vec2f = Eigen::Matrix<float,2,1>;
+using Vec6f = Eigen::Matrix<float,6,1>;
 
 
-typedef Eigen::Matrix<double,8,4> Mat84;
-typedef Eigen::Matrix<double,4,8> Mat48;
-typedef Eigen::Matrix<double,4,4> Mat44;
+
+using Mat49 = Eigen::Matrix<double,4,9>;
+using Mat89 = Eigen::Matrix<double,8,9>;
+
+using Mat94 = Eigen::Matrix<double,9,4>;
+using Mat98 = Eigen::Matrix<double,9,8>;
+
+using Mat81 = Eigen::Matrix<double,8,1>;
+using Mat18 = Eigen::Matrix<double,1,8>;
+using Mat91 = Eigen::Matrix<double,9,1>;
+using Mat19 = Eigen::Matrix<double,1,9>;
 
 
-typedef Eigen::Matrix<float,MAX_RES_PER_POINT,1> VecNRf;
-typedef Eigen::Matrix<float,12,1> Vec12f;
-typedef Eigen::Matrix<float,1,8> Mat18f;
-typedef Eigen::Matrix<float,6,6> Mat66f;
-typedef Eigen::Matrix<float,8,8> Mat88f;
-typedef Eigen::Matrix<float,8,4> Mat84f;
-typedef Eigen::Matrix<float,8,1> Vec8f;
-typedef Eigen::Matrix<float,10,1> Vec10f;
-typedef Eigen::Matrix<float,6,6> Mat66f;
-typedef Eigen::Matrix<float,4,1> Vec4f;
-typedef Eigen::Matrix<float,4,4> Mat44f;
-typedef Eigen::Matrix<float,12,12> Mat1212f;
-typedef Eigen::Matrix<float,12,1> Vec12f;
-typedef Eigen::Matrix<float,13,13> Mat1313f;
-typedef Eigen::Matrix<float,10,10> Mat1010f;
-typedef Eigen::Matrix<float,13,1> Vec13f;
-typedef Eigen::Matrix<float,9,9> Mat99f;
-typedef Eigen::Matrix<float,9,1> Vec9f;
-
-typedef Eigen::Matrix<float,4,2> Mat42f;
-typedef Eigen::Matrix<float,6,2> Mat62f;
-typedef Eigen::Matrix<float,1,2> Mat12f;
-
-typedef Eigen::Matrix<float,Eigen::Dynamic,1> VecXf;
-typedef Eigen::Matrix<float,Eigen::Dynamic,Eigen::Dynamic> MatXXf;
+using Mat84 = Eigen::Matrix<double,8,4>;
+using Mat48 = Eigen::Matrix<double,4,8>;
+using Mat44 = Eigen::Matrix<double,4,4>;
 
 
-typedef Eigen::Matrix<double,8+CPARS+1,8+CPARS+1> MatPCPC;
-typedef Eigen::Matrix<float,8+CPARS+1,8+CPARS+1> MatPCPCf;
-typedef Eigen::Matrix<double,8+CPARS+1,1> VecPC;
-typedef Eigen::Matrix<float,8+CPARS+1,1> VecPCf;
+using VecNRf = Eigen::Matrix<float,MAX_RES_PER_POINT,1>;
+using Vec12f = Eigen::Matrix<float,12,1>;
+using Mat18f = Eigen::Matrix<float,1,8>;
+using Mat66f = Eigen::Matrix<float,6,6>;
+using Mat88f = Eigen::Matrix<float,8,8>;
+using Mat84f = Eigen::Matrix<float,8,4>;
+using Vec8f = Eigen::Matrix<float,8,1>;
+using Vec10f = Eigen::Matrix<float,10,1>;
+using Mat66f = Eigen::Matrix<float,6,6>;
+using Vec4f = Eigen::Matrix<float,4,1>;
+using Mat44f = Eigen::Matrix<float,4,4>;
+using Mat1212f = Eigen::Matrix<float,12,12>;
+using Vec12f = Eigen::Matrix<float,12,1>;
+using Mat1313f = Eigen::Matrix<float,13,13>;
+using Mat1010f = Eigen::Matrix<float,10,10>;
+using Vec13f = Eigen::Matrix<float,13,1>;
+using Mat99f = Eigen::Matrix<float,9,9>;
+using Vec9f = Eigen::Matrix<float,9,1>;
 
-typedef Eigen::Matrix<float,14,14> Mat1414f;
-typedef Eigen::Matrix<float,14,1> Vec14f;
-typedef Eigen::Matrix<double,14,14> Mat1414;
-typedef Eigen::Matrix<double,14,1> Vec14;
+using Mat42f = Eigen::Matrix<float,4,2>;
+using Mat62f = Eigen::Matrix<float,6,2>;
+using Mat12f = Eigen::Matrix<float,1,2>;
+
+using VecXf = Eigen::Matrix<float,Eigen::Dynamic,1>;
+using MatXXf = Eigen::Matrix<float,Eigen::Dynamic,Eigen::Dynamic>;
+
+
+using MatPCPC = Eigen::Matrix<double,8+CPARS+1,8+CPARS+1>;
+using MatPCPCf = Eigen::Matrix<float,8+CPARS+1,8+CPARS+1>;
+using VecPC = Eigen::Matrix<double,8+CPARS+1,1>;
+using VecPCf = Eigen::Matrix<float,8+CPARS+1,1>;
+
+using Mat1414f = Eigen::Matrix<float,14,14>;
+using Vec14f = Eigen::Matrix<float,14,1>;
+using Mat1414 = Eigen::Matrix<double,14,14>;
+using Vec14 = Eigen::Matrix<double,14,1>;
 
 
 
@@ -192,4 +192,3 @@ struct AffLight
 };
 
 }
-

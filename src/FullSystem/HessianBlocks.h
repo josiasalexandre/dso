@@ -1,6 +1,6 @@
 /**
 * This file is part of DSO.
-* 
+*
 * Copyright 2016 Technical University of Munich and Intel.
 * Developed by Jakob Engel <engelj at in dot tum dot de>,
 * for more information see <http://vision.in.tum.de/dso>.
@@ -25,10 +25,10 @@
 #pragma once
 #define MAX_ACTIVE_FRAMES 100
 
- 
+
 #include "util/globalCalib.h"
 #include "vector"
- 
+
 #include <iostream>
 #include <fstream>
 #include "util/NumType.h"
@@ -146,7 +146,7 @@ struct FrameHessian
 	Vec6 nullspaces_scale;
 
 	// variable info.
-	SE3 worldToCam_evalPT;
+	SE3R worldToCam_evalPT;
 	Vec10 state_zero;
 	Vec10 state_scaled;
 	Vec10 state;	// [0-5: worldToCam-leftEps. 6-7: a,b]
@@ -155,7 +155,7 @@ struct FrameHessian
 	Vec10 state_backup;
 
 
-    EIGEN_STRONG_INLINE const SE3 &get_worldToCam_evalPT() const {return worldToCam_evalPT;}
+    EIGEN_STRONG_INLINE const SE3R &get_worldToCam_evalPT() const {return worldToCam_evalPT;}
     EIGEN_STRONG_INLINE const Vec10 &get_state_zero() const {return state_zero;}
     EIGEN_STRONG_INLINE const Vec10 &get_state() const {return state;}
     EIGEN_STRONG_INLINE const Vec10 &get_state_scaled() const {return state_scaled;}
@@ -163,8 +163,8 @@ struct FrameHessian
 
 
 	// precalc values
-	SE3 PRE_worldToCam;
-	SE3 PRE_camToWorld;
+	SE3R PRE_worldToCam;
+	SE3R PRE_camToWorld;
 	std::vector<FrameFramePrecalc,Eigen::aligned_allocator<FrameFramePrecalc>> targetPrecalc;
 	MinimalImageB3* debugImage;
 
@@ -187,7 +187,7 @@ struct FrameHessian
 		state_scaled[8] = SCALE_A * state[8];
 		state_scaled[9] = SCALE_B * state[9];
 
-		PRE_worldToCam = SE3::exp(w2c_leftEps()) * get_worldToCam_evalPT();
+		PRE_worldToCam = SE3R::exp(w2c_leftEps()) * get_worldToCam_evalPT();
 		PRE_camToWorld = PRE_worldToCam.inverse();
 		//setCurrentNullspace();
 	};
@@ -202,11 +202,11 @@ struct FrameHessian
 		state[8] = SCALE_A_INVERSE * state_scaled[8];
 		state[9] = SCALE_B_INVERSE * state_scaled[9];
 
-		PRE_worldToCam = SE3::exp(w2c_leftEps()) * get_worldToCam_evalPT();
+		PRE_worldToCam = SE3R::exp(w2c_leftEps()) * get_worldToCam_evalPT();
 		PRE_camToWorld = PRE_worldToCam.inverse();
 		//setCurrentNullspace();
 	};
-	inline void setEvalPT(const SE3 &worldToCam_evalPT, const Vec10 &state)
+	inline void setEvalPT(const SE3R &worldToCam_evalPT, const Vec10 &state)
 	{
 
 		this->worldToCam_evalPT = worldToCam_evalPT;
@@ -216,7 +216,7 @@ struct FrameHessian
 
 
 
-	inline void setEvalPT_scaled(const SE3 &worldToCam_evalPT, const AffLight &aff_g2l)
+	inline void setEvalPT_scaled(const SE3R &worldToCam_evalPT, const AffLight &aff_g2l)
 	{
 		Vec10 initial_state = Vec10::Zero();
 		initial_state[6] = aff_g2l.a;
@@ -502,4 +502,3 @@ struct PointHessian
 
 
 }
-

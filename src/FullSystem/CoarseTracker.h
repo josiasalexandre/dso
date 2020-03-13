@@ -1,6 +1,6 @@
 /**
 * This file is part of DSO.
-* 
+*
 * Copyright 2016 Technical University of Munich and Intel.
 * Developed by Jakob Engel <engelj at in dot tum dot de>,
 * for more information see <http://vision.in.tum.de/dso>.
@@ -24,7 +24,7 @@
 
 #pragma once
 
- 
+
 #include "util/NumType.h"
 #include "vector"
 #include <math.h>
@@ -50,7 +50,7 @@ public:
 
 	bool trackNewestCoarse(
 			FrameHessian* newFrameHessian,
-			SE3 &lastToNew_out, AffLight &aff_g2l_out,
+			SE3R &lastToNew_out, AffLight &aff_g2l_out,
 			int coarsestLvl, Vec5 minResForAbort,
 			IOWrap::Output3DWrapper* wrap=0);
 
@@ -96,10 +96,10 @@ private:
 	float* weightSums_bak[PYR_LEVELS];
 
 
-	Vec6 calcResAndGS(int lvl, Mat88 &H_out, Vec8 &b_out, const SE3 &refToNew, AffLight aff_g2l, float cutoffTH);
-	Vec6 calcRes(int lvl, const SE3 &refToNew, AffLight aff_g2l, float cutoffTH);
-	void calcGSSSE(int lvl, Mat88 &H_out, Vec8 &b_out, const SE3 &refToNew, AffLight aff_g2l);
-	void calcGS(int lvl, Mat88 &H_out, Vec8 &b_out, const SE3 &refToNew, AffLight aff_g2l);
+	Vec6 calcResAndGS(int lvl, Mat88 &H_out, Vec8 &b_out, const SE3R &refToNew, AffLight aff_g2l, float cutoffTH);
+	Vec6 calcRes(int lvl, const SE3R &refToNew, AffLight aff_g2l, float cutoffTH);
+	void calcGSSSE(int lvl, Mat88 &H_out, Vec8 &b_out, const SE3R &refToNew, AffLight aff_g2l);
+	void calcGS(int lvl, Mat88 &H_out, Vec8 &b_out, const SE3R &refToNew, AffLight aff_g2l);
 
 	// pc buffers
 	float* pc_u[PYR_LEVELS];
@@ -173,4 +173,3 @@ private:
 };
 
 }
-

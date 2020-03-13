@@ -1,6 +1,6 @@
 /**
 * This file is part of DSO.
-* 
+*
 * Copyright 2016 Technical University of Munich and Intel.
 * Developed by Jakob Engel <engelj at in dot tum dot de>,
 * for more information see <http://vision.in.tum.de/dso>.
@@ -94,7 +94,7 @@ public:
 	Pnt* points[PYR_LEVELS];
 	int numPoints[PYR_LEVELS];
 	AffLight thisToNext_aff;
-	SE3 thisToNext;
+	SE3R thisToNext;
 
 
 	FrameHessian* firstFrame;
@@ -142,7 +142,7 @@ private:
 			int lvl,
 			Mat88f &H_out, Vec8f &b_out,
 			Mat88f &H_out_sc, Vec8f &b_out_sc,
-			const SE3 &refToNew, AffLight refToNew_aff,
+			const SE3R &refToNew, AffLight refToNew_aff,
 			bool plot);
 	Vec3f calcEC(int lvl); // returns OLD NERGY, NEW ENERGY, NUM TERMS.
 	void optReg(int lvl);
@@ -188,5 +188,3 @@ struct FLANNPointcloud
 };
 
 }
-
-

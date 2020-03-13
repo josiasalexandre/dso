@@ -1,6 +1,6 @@
 /**
 * This file is part of DSO.
-* 
+*
 * Copyright 2016 Technical University of Munich and Intel.
 * Developed by Jakob Engel <engelj at in dot tum dot de>,
 * for more information see <http://vision.in.tum.de/dso>.
@@ -45,7 +45,7 @@
 namespace dso
 {
 
-CoarseInitializer::CoarseInitializer(int ww, int hh) : thisToNext_aff(0,0), thisToNext(SE3())
+CoarseInitializer::CoarseInitializer(int ww, int hh) : thisToNext_aff(0,0), thisToNext(SE3R())
 {
 	for(int lvl=0; lvl<pyrLevelsUsed; lvl++)
 	{
@@ -111,7 +111,7 @@ bool CoarseInitializer::trackFrame(FrameHessian* newFrameHessian, std::vector<IO
 	}
 
 
-	SE3 refToNew_current = thisToNext;
+	SE3R refToNew_current = thisToNext;
 	AffLight refToNew_aff_current = thisToNext_aff;
 
 	if(firstFrame->ab_exposure>0 && newFrame->ab_exposure>0)
@@ -121,8 +121,6 @@ bool CoarseInitializer::trackFrame(FrameHessian* newFrameHessian, std::vector<IO
 	Vec3f latestRes = Vec3f::Zero();
 	for(int lvl=pyrLevelsUsed-1; lvl>=0; lvl--)
 	{
-
-
 
 		if(lvl<pyrLevelsUsed-1)
 			propagateDown(lvl+1);
@@ -173,7 +171,7 @@ bool CoarseInitializer::trackFrame(FrameHessian* newFrameHessian, std::vector<IO
 				inc = - (wM * (Hl.ldlt().solve(bl)));	//=-H^-1 * b.
 
 
-			SE3 refToNew_new = SE3::exp(inc.head<6>().cast<double>()) * refToNew_current;
+			SE3R refToNew_new = SE3R::exp(inc.head<6>().cast<double>()) * refToNew_current;
 			AffLight refToNew_aff_new = refToNew_aff_current;
 			refToNew_aff_new.a += inc[6];
 			refToNew_aff_new.b += inc[7];
@@ -329,7 +327,7 @@ void CoarseInitializer::debugPlot(int lvl, std::vector<IOWrap::Output3DWrapper*>
 Vec3f CoarseInitializer::calcResAndGS(
 		int lvl, Mat88f &H_out, Vec8f &b_out,
 		Mat88f &H_out_sc, Vec8f &b_out_sc,
-		const SE3 &refToNew, AffLight refToNew_aff,
+		const SE3R &refToNew, AffLight refToNew_aff,
 		bool plot)
 {
 	int wl = w[lvl], hl = h[lvl];
@@ -842,7 +840,7 @@ void CoarseInitializer::setFirst(	CalibHessian* HCalib, FrameHessian* newFrameHe
 
 	makeNN();
 
-	thisToNext=SE3();
+	thisToNext=SE3R();
 	snapped = false;
 	frameID = snappedAt = 0;
 
@@ -1040,4 +1038,3 @@ void CoarseInitializer::makeNN()
 		delete indexes[i];
 }
 }
-
